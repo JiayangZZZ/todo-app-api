@@ -1,0 +1,25 @@
+{
+  "name": "todo-app-api",
+  "version": "0.0.0",
+  "description": "todo-app-api ============",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/JiayangZZZ/todo-app-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JiayangZZZ/todo-app-api/issues"
+  },
+  "homepage": "https://github.com/JiayangZZZ/todo-app-api",
+  "dependencyies": {
+    "express": "~3.4.8"
+  },
+  "dependencies": {
+    "express": "~4.0.0-rc2"
+  }
+}
