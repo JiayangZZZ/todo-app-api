@@ -16,8 +16,10 @@
     "url": "https://github.com/JiayangZZZ/todo-app-api/issues"
   },
   "homepage": "https://github.com/JiayangZZZ/todo-app-api",
-
   "dependencies": {
-    "express": "3.1.2"
+    "express": "3.1.2",
+    "sql": "~0.35.0",
+    "sha1": "~1.1.0",
+    "refresh-token": "0.0.2"
   }
 }
