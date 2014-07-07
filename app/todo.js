@@ -78,10 +78,9 @@ Todo.prototype.update = function(callback) {
     .update({
       id : this.todoId,
       user_id : this.userId,
-      created_time : '',
       title : this.title,
       description : this.description,
-      status : this.status
+      status : '1'
     }).where(todoTable.id.equals(this.todoId))
     .toQuery();
     console.log(q.text);

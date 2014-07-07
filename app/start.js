@@ -2,6 +2,7 @@
 GLOBAL.sql = require('sql');
 sql.setDialect('mysql');
 
+/*using Express framework*/
 var express = require('express')
   , http = require('http')
   , requirejs = require('requirejs')
@@ -20,26 +21,6 @@ GLOBAL.db = mysql.createConnection({
   database : 'todo-app'
 });
 
-// connection.config.queryFormat = function(query, values) {
-//   if (!values) return query;
-
-//   console.log(query.replace(/\$(\d+)/g, function(match, key) {
-//     key = key - 1;
-//     if (key < values.length) {
-//       return this.escape(values[key]);
-//     }
-//     return match;
-//   }.bind(this)))
-
-//   return query.replace(/\$(\d+)/g, function(match, key) {
-//     key = key - 1;
-//     if (key < values.length) {
-//       return this.escape(values[key]);
-//     }
-//     return match;
-//   }.bind(this));
-// };
-
 GLOBAL.userTable = sql.define({
   name: 'users',
   columns: ['id', 'username', 'password', 'created_time']
@@ -57,7 +38,13 @@ GLOBAL.tokenTable = sql.define({
 
 db.connect();
 
-// user.putName('Oskar');
+
+//access-control-allow-origin header
+app.all('*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+ });
 
 function isEmpty(obj) {
   if(typeof obj === 'undefined') {
@@ -228,6 +215,7 @@ app.del('/todos/:id', authenticate, function(req, res) {
 
 app.put('/todos/:id', authenticate, function(req, res) {
   var todo = new Todo({
+    userId : req.param('userId'),
     id : req.param('id'),
     title : req.param('title'),
     description : req.param('description'),
