@@ -194,8 +194,9 @@ app.post('/create', authenticate, function(req, res) {
     accessToken : req.param('accessToken')
   });
 
-  todo.create(function(err) {
+  todo.create(function(err, result) {
     if(!err) {
+      todo.id = result.insertId;
       return res.json(todo);
     }
     throw err;

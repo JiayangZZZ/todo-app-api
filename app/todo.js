@@ -40,8 +40,9 @@ Todo.prototype.create = function(callback) {
     }).toQuery();
 
   db.query(q.text, q.values, function(err, result) {
-    if(!err)
+    if(!err){
       return callback(null, result);
+    }
     callback(err);
   });
 }
