@@ -172,11 +172,12 @@ function authenticate(req, res, next) {
 
   db.query(q.text, q.values, function(err, result) {
     if(!err) {
+      console.log('Query results: '+ result.length);
       if(result.length === 0) {
-        console.log('adsfasdf'+ result.length);
+        console.log('Query results: '+ result.length);
         console.log(q.text);
         console.log(q.values);
-        return res.json(401, {error : 'access_denied'});
+        return res.json(401, {error : 'access_denied!!!'});
        }
       else {
         next();
@@ -185,7 +186,7 @@ function authenticate(req, res, next) {
   });
 }
 
-app.post('/todos', authenticate, function(req, res) {
+app.post('/create', authenticate, function(req, res) {
   var todo = new Todo({
     userId : req.param('userId'),
     title : req.param('title'),
@@ -193,9 +194,7 @@ app.post('/todos', authenticate, function(req, res) {
     accessToken : req.param('accessToken')
   });
 
-  console.log(todo);
-
-  todo.create(function(err, todo) {
+  todo.create(function(err) {
     if(!err) {
       return res.json(todo);
     }

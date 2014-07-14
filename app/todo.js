@@ -30,14 +30,6 @@ function Todo (opts) {
 
 
 Todo.prototype.create = function(callback) {
-    // todoTable
-    // .insert({
-    //     user_id : this.userId,
-    //     title : this.title,
-    //     description : this.description,
-    //     status : 1
-    // }).toQuery().text
-
 
   var q = todoTable
     .insert({
@@ -48,9 +40,8 @@ Todo.prototype.create = function(callback) {
     }).toQuery();
 
   db.query(q.text, q.values, function(err, result) {
-    // if(!err) {
-    //   return callback(null, result);
-    // }
+    if(!err)
+      return callback(null, result);
     callback(err);
   });
 }
