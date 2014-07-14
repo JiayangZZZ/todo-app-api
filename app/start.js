@@ -46,6 +46,18 @@ app.all('*', function(req, res, next) {
   next();
  });
 
+app.options( '*', [], function( query, reply ) {
+reply.writeHead( '200', {
+'Access-Control-Allow-Origin': '*', // allow x-domain requests
+'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE, OPTIONS', // enable all http methods
+'Access-Control-Allow-Credentials': false,
+'Access-Control-Max-Age': '86400', // allow caching of this response
+'Access-Control-Allow-Headers': 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept'
+} );
+reply.end();
+} );
+
+
 function isEmpty(obj) {
   if(typeof obj === 'undefined') {
     return true;
@@ -161,6 +173,9 @@ function authenticate(req, res, next) {
   db.query(q.text, q.values, function(err, result) {
     if(!err) {
       if(result.length === 0) {
+        console.log('adsfasdf'+ result.length);
+        console.log(q.text);
+        console.log(q.values);
         return res.json(401, {error : 'access_denied'});
        }
       else {
@@ -179,16 +194,6 @@ app.post('/todos', authenticate, function(req, res) {
   });
 
   console.log(todo);
-  //res.send('lkwfefn')
-
-  // todo.create(function(err) {
-  //   if(!err) {
-  //     res.json(todo)
-  //   }
-  //   else {
-  //     return res.json(500, {error : 'Internal Server Error'});
-  //   }
-  // });
 
   todo.create(function(err, todo) {
     if(!err) {
