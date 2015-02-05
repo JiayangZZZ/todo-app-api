@@ -18,17 +18,12 @@ function Todo (opts) {
   if(opts.accessToken) this.accessToken = opts.accessToken;
 }
 
-// var q3 = todoTable
-//   . select('*')
-//   . from(todoTable)
-//   . toQuery();
-
-// var todos;
-// db.query(q.text, q.values, function(err, result) {
-//   todos = result;
-// });
-
-
+/**
+ * Create Todo
+ *
+ * @return query result, with insertId
+ * @private
+ */
 Todo.prototype.create = function(callback) {
 
   var q = todoTable
@@ -65,6 +60,12 @@ console.log(this.todoId);
   });
 }
 
+/**
+ * Update Todo
+ *
+ * @return
+ * @private
+ */
 Todo.prototype.update = function(callback) {
   var q = todoTable
     .update({

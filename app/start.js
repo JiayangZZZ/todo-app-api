@@ -172,7 +172,6 @@ function authenticate(req, res, next) {
 
   db.query(q.text, q.values, function(err, result) {
     if(!err) {
-      console.log('Query results: '+ result.length);
       if(result.length === 0) {
         console.log('Query results: '+ result.length);
         console.log(q.text);
